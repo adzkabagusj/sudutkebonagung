@@ -9,8 +9,8 @@ export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = await params;
+}) {
+  const { slug } = params;
   const response = await fetcher(`/api/destinasis?filters[slug][$eq]=${slug}`);
   if (!response.data || response.data.length === 0) {
     return { title: "Destinasi Tidak Ditemukan" };
@@ -28,7 +28,7 @@ export default async function DestinationDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const response = await fetcher(`/api/destinasis`, {
     filters: { slug: { $eq: slug } },
     populate: {
@@ -66,20 +66,23 @@ export default async function DestinationDetailPage({
           {destination.galeri && destination.galeri.length > 0 ? (
             destination.galeri.map((image) => {
               // LOGIKA BARU YANG LEBIH AMAN
-              const imageUrl =
+              let imageUrl =
                 image.formats.medium?.url ??
                 image.formats.small?.url ??
                 image.url;
+
+              if (!imageUrl.startsWith("http")) {
+                const strapiUrl =
+                  process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+                imageUrl = `${strapiUrl}${imageUrl}`;
+              }
 
               return (
                 <div
                   key={image.id}
                   className="relative aspect-square rounded-lg shadow-md overflow-hidden">
                   <Image
-                    src={`${
-                      process.env.NEXT_PUBLIC_STRAPI_URL ||
-                      "http://localhost:1337"
-                    }${imageUrl}`}
+                    src={imageUrl}
                     alt={destination.nama}
                     fill
                     className="object-cover"

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-// Fungsi untuk generate Metadata dinamis
+// This function is already correct! No changes needed.
 export async function generateMetadata({
   params,
 }: {
@@ -12,12 +12,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const desaNama = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
   return {
-    title: `Profil Desa ${desaNama} - SudutKebonagung`,
+    title: `Profil Desa ${desaNama}`,
     description: `Informasi lengkap mengenai profil, sejarah, dan potensi Desa ${desaNama}.`,
   };
 }
 
-// Komponen untuk menampilkan data kunci
+// A simple presentational component. No changes needed.
 function InfoCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-surface p-6 rounded-lg shadow-md text-center">
@@ -31,9 +31,12 @@ function InfoCard({ label, value }: { label: string; value: string }) {
 export default async function ProfilDesaPage({
   params,
 }: {
+  // CORRECTED: params is a plain object, not a Promise
   params: { slug: string };
 }) {
-  const desaNama = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
+  // CORRECTED: No await needed
+  const { slug } = params;
+  const desaNama = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const response = await fetcher(`/api/profil-desas`, {
     filters: { nama_desa: { $eq: desaNama } },
@@ -45,6 +48,28 @@ export default async function ProfilDesaPage({
   }
 
   const profil: ProfilDesa = response.data[0];
+
+  // A single, safe helper function to create image URLs
+  const createSafeImageUrl = (imageObject: any) => {
+    // Return a placeholder if the image object or its URL is missing
+    if (!imageObject || !imageObject.url) return "/placeholder.png";
+
+    // Safely get the best available image format
+    let imagePath =
+      imageObject.formats?.medium?.url ??
+      imageObject.formats?.small?.url ??
+      imageObject.url;
+
+    // Return the absolute URL directly if it's already one
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    }
+
+    // Otherwise, construct the full URL from the relative path
+    return `${
+      process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
+    }${imagePath}`;
+  };
 
   return (
     <article className="max-w-5xl mx-auto py-8">
@@ -69,7 +94,6 @@ export default async function ProfilDesaPage({
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-primary mb-4">Sejarah Desa</h2>
         <div className="prose prose-lg max-w-none">
-          {/* @ts-ignore */}
           <BlocksRenderer content={profil.sejarah} />
         </div>
       </section>
@@ -78,7 +102,6 @@ export default async function ProfilDesaPage({
       <section className="mb-16 bg-surface p-8 rounded-lg shadow">
         <h2 className="text-3xl font-bold text-primary mb-4">Visi & Misi</h2>
         <div className="prose prose-lg max-w-none">
-          {/* @ts-ignore */}
           <BlocksRenderer content={profil.visi_misi} />
         </div>
       </section>
@@ -91,12 +114,10 @@ export default async function ProfilDesaPage({
           </h2>
           <div className="relative w-full aspect-video rounded-lg shadow-lg overflow-hidden border">
             <Image
-              src={`${
-                process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
-              }${profil.foto_struktur_pemerintahan.url}`}
+              src={createSafeImageUrl(profil.foto_struktur_pemerintahan)}
               alt={`Foto struktur pemerintahan Desa ${profil.nama_desa}`}
               fill
-              className="object-contain" // object-contain agar gambar tidak terpotong
+              className="object-contain" // object-contain is great for official charts
             />
           </div>
         </section>
@@ -106,7 +127,6 @@ export default async function ProfilDesaPage({
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-primary mb-4">Potensi Desa</h2>
         <div className="prose prose-lg max-w-none">
-          {/* @ts-ignore */}
           <BlocksRenderer content={profil.potensi_desa} />
         </div>
       </section>
@@ -121,10 +141,7 @@ export default async function ProfilDesaPage({
                 key={image.id}
                 className="relative aspect-video rounded-lg shadow-md overflow-hidden">
                 <Image
-                  src={`${
-                    process.env.NEXT_PUBLIC_STRAPI_URL ||
-                    "http://localhost:1337"
-                  }${image.formats.medium.url}`}
+                  src={createSafeImageUrl(image)}
                   alt={`Gambar Desa ${profil.nama_desa}`}
                   fill
                   className="object-cover"

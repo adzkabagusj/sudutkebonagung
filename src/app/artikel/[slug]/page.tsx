@@ -4,13 +4,18 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+// Define the props type for the page and metadata function
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 // Fungsi untuk generate Metadata dinamis
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = await params;
+}: PageProps): Promise<Metadata> {
+  const { slug } = params;
   const articleResponse = await fetcher(`/api/artikels`, {
     filters: { slug: { $eq: slug } },
   });
@@ -28,28 +33,26 @@ export async function generateMetadata({
 }
 
 // Halaman Detail Artikel
-export default async function ArticleDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = await params;
-  // Ambil data untuk artikel spesifik berdasarkan slug dari URL
+export default async function ArticleDetailPage({ params }: PageProps) {
+  const { slug } = params;
   const articleResponse = await fetcher(`/api/artikels`, {
     filters: { slug: { $eq: slug } },
-    // Populate * untuk mengambil semua field, termasuk isi_artikel
     populate: "*",
   });
 
-  // Jika tidak ada data atau array kosong, tampilkan halaman 404
   if (!articleResponse.data || articleResponse.data.length === 0) {
     notFound();
   }
 
   const article = articleResponse.data[0];
-  const imageUrl = `${
-    process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
-  }${article.gambar_utama.formats.small.url}`;
+  const strapiUrl =
+    process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+  let imageUrl = article.gambar_utama.formats.small.url;
+
+  // Only add the base URL if the path from Strapi is relative
+  if (!imageUrl.startsWith("http")) {
+    imageUrl = `${strapiUrl}${imageUrl}`;
+  }
 
   return (
     <article className="max-w-4xl mx-auto py-8">
@@ -65,7 +68,6 @@ export default async function ArticleDetailPage({
             day: "numeric",
           })}
         </span>
-        {/* Tampilkan penulis jika ada */}
         {article.penulis && (
           <>
             <span>•</span>
@@ -80,11 +82,10 @@ export default async function ArticleDetailPage({
           alt={`Gambar utama untuk ${article.judul}`}
           fill
           className="object-cover"
-          priority // Prioritaskan gambar utama untuk dimuat
+          priority
         />
       </div>
 
-      {/* Render konten Rich Text di sini */}
       <div className="prose prose-lg max-w-none prose-p:text-text_primary prose-headings:text-primary prose-a:text-secondary">
         {/* @ts-ignore */}
         <BlocksRenderer content={article.isi_artikel} />

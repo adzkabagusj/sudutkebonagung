@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -13,6 +12,18 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "placehold.co",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "acceptable-pleasure-080d6fc094.strapiapp.comhttps",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "acceptable-pleasure-080d6fc094.media.strapiapp.com",
         port: "",
         pathname: "/**",
       },

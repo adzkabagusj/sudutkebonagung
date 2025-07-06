@@ -4,11 +4,17 @@ import Link from "next/link";
 
 function DestinationCard({ destination }: { destination: Destination }) {
   const firstImage = destination.galeri?.[0];
-  const imageUrl = firstImage
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"}${
-        firstImage.formats.small.url
-      }`
-    : "https://placehold.co/600x400?text=Gambar";
+  let imageUrl = "https://placehold.co/600x400?text=Gambar";
+  if (firstImage) {
+    const imagePath = firstImage.formats.small.url;
+    if (imagePath.startsWith("http")) {
+      imageUrl = imagePath;
+    } else {
+      const strapiUrl =
+        process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+      imageUrl = `${strapiUrl}${imagePath}`;
+    }
+  }
 
   return (
     <Link

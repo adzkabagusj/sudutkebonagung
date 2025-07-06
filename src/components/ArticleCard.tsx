@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 function ArticleCard({ article }: { article: Article }) {
-  const imageUrl = `${
-    process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
-  }${article.gambar_utama.formats.small.url}`;
+  const strapiUrl =
+    process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+  let imageUrl = article.gambar_utama.formats.small.url;
+  if (!imageUrl.startsWith("http")) {
+    imageUrl = `${strapiUrl}${imageUrl}`;
+  }
 
   return (
     <Link

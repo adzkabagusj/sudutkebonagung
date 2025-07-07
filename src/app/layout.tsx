@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 // Metadata default untuk SEO
 export const metadata: Metadata = {
-  title: "Pesona Plumbungan",
+  title: "Desa Plumbungan",
   description:
     "Website profil dan promosi untuk Desa Plumbungan di Kecamatan Kebonagung, Pacitan.",
 };

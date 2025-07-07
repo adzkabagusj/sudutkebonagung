@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Destinasi Wisata - SudutKebonagung",
   description:
-    "Jelajahi keindahan alam dan budaya di berbagai destinasi wisata Desa Plumbungan dan Karangnongko.",
+    "Jelajahi keindahan alam dan budaya di berbagai destinasi wisata Desa Plumbungan.",
 };
 
 export default async function DestinationsPage() {

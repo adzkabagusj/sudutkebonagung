@@ -9,7 +9,7 @@ const Footer = () => {
           &copy; {currentYear} Mengarung Kebonagung. All rights reserved.
         </p>
         <p className="text-sm text-primary-light mt-2">
-          Website Profil dan Promosi Desa Plumbungan & Karangnongko
+          Website Profil dan Promosi Desa Plumbungan
         </p>
       </div>
     </footer>

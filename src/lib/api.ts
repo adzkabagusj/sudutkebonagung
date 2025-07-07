@@ -12,7 +12,6 @@ export async function fetcher(
       encodeValuesOnly: true,
     });
 
-    // Ini adalah baris yang menggunakan backtick dengan benar
     const requestUrl = `${STRAPI_URL}${path}${
       queryString ? `?${queryString}` : ""
     }`;

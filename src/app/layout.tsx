@@ -13,9 +13,9 @@ const poppins = Poppins({
 
 // Metadata default untuk SEO
 export const metadata: Metadata = {
-  title: "SudutKebonagung - Pesona Plumbungan & Karangnongko",
+  title: "Pesona Plumbungan",
   description:
-    "Website profil dan promosi untuk Desa Plumbungan dan Desa Karangnongko di Kecamatan Kebonagung, Pacitan.",
+    "Website profil dan promosi untuk Desa Plumbungan di Kecamatan Kebonagung, Pacitan.",
 };
 
 export default function RootLayout({

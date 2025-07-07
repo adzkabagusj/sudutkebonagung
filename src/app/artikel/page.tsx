@@ -3,9 +3,9 @@ import ArticleCard from "@/components/ArticleCard"; // Mengimpor dari komponen t
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Artikel - SudutKebonagung",
+  title: "Artikel - Desa Plumbungan",
   description:
-    "Kumpulan kabar, cerita, dan informasi terbaru dari Desa Plumbungan dan Karangnongko.",
+    "Kumpulan kabar, cerita, dan informasi terbaru dari Desa Plumbungan",
 };
 
 export default async function ArticlesPage() {

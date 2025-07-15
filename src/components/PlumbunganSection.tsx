@@ -21,12 +21,12 @@ export default async function PlumbunganSection() {
   const profil: ProfilDesa = response.data[0];
 
   return (
-    <section id="profil-desa" className="py-24 bg-surface">
+    <section id="profil-desa" className="py-24 bg-surface shadow-xl">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-bold text-text_primary">
+        <h2 className="text-2xl md:text-4xl font-bold text-text_primary">
           Sekilas Tentang Desa Plumbungan
         </h2>
-        <p className="text-lg text-text_secondary mt-4 max-w-3xl mx-auto">
+        <p className="text-md md:text-lg text-text_secondary mt-4 max-w-3xl mx-auto">
           {truncateText(profil.deskripsi_desa, 200)}
         </p>
         <div className="mt-8">

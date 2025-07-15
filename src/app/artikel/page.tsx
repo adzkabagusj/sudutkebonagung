@@ -21,8 +21,8 @@ export default async function ArticlesPage() {
     <div>
       {/* Bagian Daftar Artikel */}
       <section className="my-12">
-        <h2 className="text-4xl font-bold text-text_primary mb-8 text-center">
-          Telusuri Semua Artikel
+        <h2 className="text-3xl md:text-4xl font-bold text-text_primary mb-8 text-center">
+          Telusuri Artikel Desa Plumbungan
         </h2>
         {/* Render komponen interaktif, berikan semua artikel sebagai data awal */}
         <ArticleList initialArticles={articles} />

@@ -26,7 +26,7 @@ export default function FeaturedArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/artikel/${article.slug}`}
-      className="group grid md:grid-cols-2 gap-8 items-center">
+      className="group grid md:grid-cols-2 gap-8 items-center bg-surface shadow-lg rounded-lg p-4 md:p-10">
       <div className="relative aspect-video rounded-lg shadow-lg overflow-hidden">
         <Image
           src={imageUrl}
@@ -44,7 +44,7 @@ export default function FeaturedArticleCard({ article }: { article: Article }) {
             {article.tag}
           </span>
         )}
-        <h2 className="text-3xl font-bold text-text_primary mt-4 group-hover:text-secondary transition-colors">
+        <h2 className="text-xl md:text-3xl font-bold text-text_primary mt-4 group-hover:text-secondary transition-colors">
           {article.judul}
         </h2>
         <p className="text-text_secondary mt-2">

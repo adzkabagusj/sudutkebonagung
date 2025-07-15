@@ -18,10 +18,10 @@ export default async function DestinationsPage() {
   return (
     <section className="my-12">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-text_primary mb-2">
+        <h1 className="text-3xl md:text-4xl font-bold text-text_primary mb-2">
           Jelajahi Semua Destinasi
         </h1>
-        <p className="text-lg text-text_secondary mb-12">
+        <p className="text-md md:text-lg text-text_secondary mb-12">
           Temukan tempat-tempat menarik yang wajib Anda kunjungi di Desa
           Plumbungan.
         </p>

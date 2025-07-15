@@ -23,13 +23,13 @@ export default async function DestinasiSection() {
   const otherDestinations = shuffledDestinations.slice(3, 9);
 
   return (
-    <section className="py-24 bg-surface">
-      <div className="container mx-auto px-6">
+    <section className="py-16 md:py-24 bg-surface shadow-xl rounded-xl">
+      <div className="container mx-auto px-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-text_primary">
+          <h2 className="text-2xl md:text-4xl font-bold text-text_primary">
             Jelajahi Potensi Wisata
           </h2>
-          <p className="text-lg text-text_secondary mt-2">
+          <p className="text-md md:text-lg text-text_secondary mt-2">
             Temukan keindahan tersembunyi yang ditawarkan Desa Plumbungan.
           </p>
         </div>

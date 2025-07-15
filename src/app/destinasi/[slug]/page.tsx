@@ -1,8 +1,10 @@
 import { fetcher, Destination } from "@/lib/api";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import RecommendedDestinations from "@/components/RecommendedDestinations"; // <-- 1. IMPORT KOMPONEN BARU
+import type { Metadata } from "next";
+
+import RecommendedDestinations from "@/components/RecommendedDestinations";
+import ImageSlider from "@/components/ImageSlider"; // <-- Impor komponen slider baru
 
 export async function generateMetadata({
   params,
@@ -28,7 +30,6 @@ export default async function DestinationDetailPage({
 }) {
   const { slug } = params;
 
-  // Fetch destinasi yang sedang dibuka
   const response = await fetcher(`/api/destinasis`, {
     filters: { slug: { $eq: slug } },
     populate: "*",
@@ -40,9 +41,8 @@ export default async function DestinationDetailPage({
 
   const destination: Destination = response.data[0];
 
-  // 2. FETCH DESTINASI LAIN UNTUK REKOMENDASI
   const recommendedDestinationsResponse = await fetcher(`/api/destinasis`, {
-    filters: { slug: { $ne: slug } }, // Filter: tidak sama dengan slug saat ini
+    filters: { slug: { $ne: slug } },
     sort: "createdAt:desc",
     pagination: { limit: 3 },
     populate: "galeri",
@@ -54,53 +54,23 @@ export default async function DestinationDetailPage({
     <div>
       <article className="max-w-5xl mx-auto py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-text_primary leading-tight mt-2">
+        <div className="mb-8 px-4 md:px-0">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-text_primary leading-tight mt-2 text-center">
             {destination.nama}
           </h1>
         </div>
 
-        {/* Galeri Gambar */}
+        {/* Galeri Gambar Slider */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text_primary mb-4">
-            Galeri Foto
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {destination.galeri && destination.galeri.length > 0 ? (
-              destination.galeri.map((image) => {
-                let imageUrl =
-                  image.formats.medium?.url ??
-                  image.formats.small?.url ??
-                  image.url;
-
-                if (!imageUrl.startsWith("http")) {
-                  const strapiUrl =
-                    process.env.NEXT_PUBLIC_STRAPI_URL ||
-                    "http://localhost:1337";
-                  imageUrl = `${strapiUrl}${imageUrl}`;
-                }
-
-                return (
-                  <div
-                    key={image.id}
-                    className="relative aspect-square rounded-lg shadow-md overflow-hidden">
-                    <Image
-                      src={imageUrl}
-                      alt={destination.nama}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <p>Tidak ada gambar di galeri.</p>
-            )}
-          </div>
+          {/* GANTI GRID LAMA DENGAN SLIDER BARU */}
+          <ImageSlider
+            images={destination.galeri}
+            altText={`Galeri foto untuk ${destination.nama}`}
+          />
         </section>
 
         {/* Deskripsi & Info Praktis */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 px-4 md:px-0">
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-bold text-text_primary mb-4">
               Deskripsi
@@ -162,7 +132,6 @@ export default async function DestinationDetailPage({
         </section>
       )}
 
-      {/* 3. TAMPILKAN KOMPONEN REKOMENDASI DI SINI */}
       <div className="max-w-5xl mx-auto px-6 py-8">
         <RecommendedDestinations destinations={recommendedDestinations} />
       </div>

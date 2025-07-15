@@ -78,19 +78,23 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           {article.judul}
         </h1>
 
-        <div className="flex items-center space-x-4 text-text_secondary mb-8">
+        <div className="max-md:text-sm flex flex-col md:flex-row md:items-center md:space-x-4 text-text_secondary mb-8">
           <span>
             Dipublikasikan pada{" "}
-            {new Date(article.publishedAt).toLocaleDateString("id-ID", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            <span className="font-semibold">
+              {new Date(article.publishedAt).toLocaleDateString("id-ID", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
           </span>
           {article.penulis && (
             <>
-              <span>•</span>
-              <span>Oleh: {article.penulis}</span>
+              <span className="hidden md:block">•</span>
+              <span>
+                Oleh <span className="font-semibold">{article.penulis}</span>
+              </span>
             </>
           )}
         </div>

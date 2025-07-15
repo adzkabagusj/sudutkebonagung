@@ -22,10 +22,10 @@ export default async function ArtikelSection() {
     <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-text_primary">
+          <h2 className="text-2xl md:text-4xl font-bold text-text_primary">
             Kabar Terbaru Desa
           </h2>
-          <p className="text-lg text-text_secondary mt-2">
+          <p className="text-md md:text-lg text-text_secondary mt-2">
             Ikuti perkembangan dan cerita menarik dari Desa Plumbungan.
           </p>
         </div>

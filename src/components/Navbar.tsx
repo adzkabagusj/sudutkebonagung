@@ -54,7 +54,7 @@ const Navbar = () => {
             {isMenuOpen ? (
               // Ikon 'X' (tutup)
               <svg
-                className="w-6 h-6 text-text_primary"
+                className="w-6 h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -86,7 +86,7 @@ const Navbar = () => {
 
       {/* Menu Dropdown Mobile */}
       <div
-        className={`absolute w-full bg-surface shadow-md md:hidden ${
+        className={`absolute w-full bg-[#0B184A] shadow-md md:hidden ${
           isMenuOpen ? "block" : "hidden"
         }`}>
         <div className="flex flex-col items-start px-6 py-4 space-y-4">

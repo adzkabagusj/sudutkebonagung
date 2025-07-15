@@ -42,13 +42,13 @@ export default async function DestinasiSection() {
               className="group block relative rounded-lg shadow-lg overflow-hidden h-96">
               <Image
                 src={
-                  (featuredDestinations[0].galeri?.[0]?.formats?.medium?.url?.startsWith(
+                  (featuredDestinations[0]?.galeri?.[0]?.formats?.small?.url?.startsWith(
                     "http"
                   )
                     ? ""
                     : process.env.NEXT_PUBLIC_STRAPI_URL ||
                       "http://localhost:1337") +
-                  (featuredDestinations[0].galeri?.[0]?.formats?.medium?.url ||
+                  (featuredDestinations[0]?.galeri?.[0]?.formats?.small?.url ||
                     "https://placehold.co/600x400?text=Gambar")
                 }
                 alt={featuredDestinations[0].nama}

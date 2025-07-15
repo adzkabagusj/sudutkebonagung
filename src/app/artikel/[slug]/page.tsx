@@ -27,7 +27,7 @@ export async function generateMetadata({
   }
   const article: Article = articleResponse.data[0];
   return {
-    title: `${article.judul} - SudutKebonagung`,
+    title: `${article.judul} - Desa Plumbungan`,
     description: `Baca artikel lengkap tentang ${article.judul}.`,
   };
 }

@@ -23,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const desaNama = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
   return {
-    title: `Profil Desa ${desaNama} - SudutKebonagung`,
+    title: `Profil Desa ${desaNama}`,
     description: `Informasi lengkap mengenai profil, sejarah, dan potensi Desa ${desaNama}.`,
   };
 }

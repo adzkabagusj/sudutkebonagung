@@ -18,7 +18,7 @@ export async function generateMetadata({
   }
   const destination: Destination = response.data[0];
   return {
-    title: `${destination.nama} - Destinasi SudutKebonagung`,
+    title: `${destination.nama} - Destinasi Desa Plumbungan`,
     description: `Informasi lengkap mengenai destinasi wisata ${destination.nama}.`,
   };
 }

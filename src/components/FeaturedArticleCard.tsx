@@ -1,6 +1,6 @@
-import { Article } from "@/lib/api";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { Article } from "@/lib/api";
 
 const getTagColor = (tag: Article["tag"]) => {
   switch (tag) {
@@ -15,10 +15,10 @@ const getTagColor = (tag: Article["tag"]) => {
   }
 };
 
-function ArticleCard({ article }: { article: Article }) {
+export default function FeaturedArticleCard({ article }: { article: Article }) {
   const strapiUrl =
     process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
-  let imageUrl = article.gambar_utama.formats.small.url;
+  let imageUrl = article.gambar_utama.formats.medium.url;
   if (!imageUrl.startsWith("http")) {
     imageUrl = `${strapiUrl}${imageUrl}`;
   }
@@ -26,28 +26,29 @@ function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/artikel/${article.slug}`}
-      className="block group bg-surface rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-      <div className="relative h-48 w-full">
+      className="group grid md:grid-cols-2 gap-8 items-center">
+      <div className="relative aspect-video rounded-lg shadow-lg overflow-hidden">
         <Image
           src={imageUrl}
-          alt={`Gambar untuk ${article.judul}`}
+          alt={article.judul}
           fill
-          className="object-cover"
+          className="object-cover group-hover:scale-105 transition-transform duration-300"
         />
+      </div>
+      <div>
         {article.tag && (
           <span
-            className={`absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full ${getTagColor(
+            className={`text-sm font-semibold px-3 py-1 rounded-full ${getTagColor(
               article.tag
             )}`}>
             {article.tag}
           </span>
         )}
-      </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-text_secondary group-hover:text-secondary transition-colors duration-300">
+        <h2 className="text-3xl font-bold text-text_primary mt-4 group-hover:text-secondary transition-colors">
           {article.judul}
-        </h3>
-        <p className="text-sm text-text_secondary mt-2">
+        </h2>
+        <p className="text-text_secondary mt-2">
+          Oleh {article.penulis} •{" "}
           {new Date(article.publishedAt).toLocaleDateString("id-ID", {
             year: "numeric",
             month: "long",
@@ -58,5 +59,3 @@ function ArticleCard({ article }: { article: Article }) {
     </Link>
   );
 }
-
-export default ArticleCard;

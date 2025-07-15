@@ -42,8 +42,9 @@ interface StrapiMediaFormat {
   url: string;
 }
 
-interface SimpleStrapiMedia {
+export interface SimpleStrapiMedia {
   id: number;
+  name: string;
   url: string;
   formats: {
     thumbnail: StrapiMediaFormat;
@@ -60,19 +61,16 @@ export interface Article {
   publishedAt: string;
   gambar_utama: SimpleStrapiMedia;
   penulis: string;
+  tag: "Kegiatan Desa" | "Budaya" | "Wisata";
 }
 
 export interface Destination {
   id: number;
   nama: string;
   slug: string;
-  desa: "Plumbungan" | "Karangnongko";
   deskripsi: any;
   galeri: SimpleStrapiMedia[];
-  lokasi: {
-    lat: number;
-    lng: number;
-  };
+  lokasi_map_url: string;
   info_praktis: {
     jam_buka: string;
     harga_tiket: string;
@@ -86,7 +84,7 @@ export interface ProfilDesa {
   luas_wilayah: string;
   jumlah_penduduk: string;
   jumlah_dusun: string;
-  sejarah: any;
+  deskripsi_desa: any;
   visi_misi: any;
   potensi_desa: any;
   galeri: SimpleStrapiMedia[];

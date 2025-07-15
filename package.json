@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@strapi/blocks-react-renderer": "^1.0.2",
+    "framer-motion": "^12.23.3",
     "next": "^14.2.5",
     "qs": "^6.14.0",
     "react": "^18.3.1",

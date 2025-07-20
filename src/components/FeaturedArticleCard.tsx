@@ -18,10 +18,14 @@ const getTagColor = (tag: Article["tag"]) => {
 export default function FeaturedArticleCard({ article }: { article: Article }) {
   const strapiUrl =
     process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
-  let imageUrl = article.gambar_utama.formats.medium.url;
-  if (!imageUrl.startsWith("http")) {
-    imageUrl = `${strapiUrl}${imageUrl}`;
-  }
+  const imagePath =
+    article.gambar_utama.formats.medium?.url ??
+    article.gambar_utama.formats.small?.url ??
+    article.gambar_utama.url;
+
+  const imageUrl = imagePath.startsWith("http")
+    ? imagePath
+    : `${strapiUrl}${imagePath}`;
 
   return (
     <Link

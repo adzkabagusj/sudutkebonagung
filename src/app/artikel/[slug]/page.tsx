@@ -74,7 +74,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
             {article.tag}
           </span>
         )}
-        <h1 className="text-4xl md:text-5xl font-extrabold text-text_primary leading-tight mb-4">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-text_primary leading-tight mb-4">
           {article.judul}
         </h1>
 

@@ -85,8 +85,7 @@ export interface ProfilDesa {
   jumlah_penduduk: string;
   jumlah_dusun: string;
   deskripsi_desa: any;
-  visi_misi: any;
-  potensi_desa: any;
+  sejarah_desa: any;
   galeri: SimpleStrapiMedia[];
   foto_struktur_pemerintahan: SimpleStrapiMedia;
 }

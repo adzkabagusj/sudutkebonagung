@@ -6,6 +6,7 @@ import ProfileHero from "@/components/ProfileHero";
 import ProfileMap from "@/components/ProfileMap";
 import ProfileBentoGallery from "@/components/ProfileBentoGallery";
 import Image from "next/image";
+import DusunSlider from "@/components/DusunSlider";
 
 function InfoCard({ label, value }: { label: string; value: string }) {
   return (
@@ -72,7 +73,7 @@ export default async function ProfilDesaPage({
       <div className="container mx-auto px-6 py-16">
         {/* Deskripsi */}
         <section className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-grey-800 mb-4">
+          <h2 className="text-3xl font-bold text-grey-800 mb-4 mt-8">
             Tentang Desa {profil.nama_desa}
           </h2>
           <div className="prose prose-lg max-w-none mx-auto text-left">
@@ -87,21 +88,27 @@ export default async function ProfilDesaPage({
           <InfoCard label="Jumlah Dusun" value={profil.jumlah_dusun} />
         </section>
 
+        {/* Map Desa Plumbungan */}
         <ProfileMap namaDesa={profil.nama_desa} />
 
-        {/* Visi & Misi */}
-        <section className="my-16 bg-surface p-8 rounded-lg shadow-inner max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-grey-800 mb-4 text-center">
-            Visi & Misi
-          </h2>
-          <div className="prose prose-lg max-w-none mx-auto">
-            <BlocksRenderer content={profil.visi_misi} />
-          </div>
-        </section>
+        {/* 4 Dusun di Plumbungan */}
+        <DusunSlider />
+
+        {/* Sejarah */}
+        {profil.sejarah_desa && (
+          <section className="max-w-4xl mx-auto text-center my-28">
+            <h2 className="text-3xl font-bold text-grey-800 mb-4">
+              Sejarah Desa
+            </h2>
+            <div className="prose prose-lg max-w-none mx-auto text-left">
+              <BlocksRenderer content={profil.sejarah_desa} />
+            </div>
+          </section>
+        )}
 
         {/* Foto Struktur Pemerintahan */}
         {profil.foto_struktur_pemerintahan && (
-          <section className="my-16 max-w-4xl mx-auto">
+          <section className="my-28 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-grey-800 mb-6 text-center">
               Struktur Perangkat Desa
             </h2>
@@ -116,16 +123,7 @@ export default async function ProfilDesaPage({
           </section>
         )}
 
-        {/* Potensi Desa */}
-        <section className="my-16 max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-grey-800 mb-4 text-center">
-            Potensi Desa
-          </h2>
-          <div className="prose prose-lg max-w-none mx-auto text-left">
-            <BlocksRenderer content={profil.potensi_desa} />
-          </div>
-        </section>
-
+        {/* Gallery Desa */}
         <ProfileBentoGallery
           images={profil.galeri}
           namaDesa={profil.nama_desa}

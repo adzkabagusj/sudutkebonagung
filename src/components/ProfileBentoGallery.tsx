@@ -26,7 +26,7 @@ export default function ProfileBentoGallery({
 
   return (
     <section>
-      <h2 className="text-3xl font-bold text-grey-800 mb-6 text-center">
+      <h2 className="text-3xl font-bold text-grey-800 mb-6 text-center my-28">
         Galeri Desa
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">

@@ -4,7 +4,7 @@ interface ProfileMapProps {
 
 export default function ProfileMap({ namaDesa }: ProfileMapProps) {
   return (
-    <section className="my-16">
+    <section className="my-28">
       <h2 className="text-3xl font-bold text-black mb-6 text-center">
         Lokasi Desa
       </h2>

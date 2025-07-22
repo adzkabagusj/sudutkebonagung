@@ -30,7 +30,7 @@ export default function HeroSection() {
         <div className="mt-10">
           <a
             href="#profil-desa"
-            className="inline-block bg-secondary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-secondary-dark transition-all duration-300 transform hover:scale-105">
+            className="inline-block text-sm md:text-xl bg-secondary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-secondary-dark transition-all duration-300 transform hover:scale-105">
             Jelajahi Desa
           </a>
         </div>

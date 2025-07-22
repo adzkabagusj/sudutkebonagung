@@ -47,7 +47,7 @@ export default async function ArtikelSection() {
         <div className="text-center mt-16">
           <Link
             href="/artikel"
-            className="bg-secondary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-secondary-dark transition-all duration-300">
+            className="bg-secondary text-sm md:text-xl text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-secondary-dark transition-all duration-300">
             Lihat Semua Artikel
           </Link>
         </div>

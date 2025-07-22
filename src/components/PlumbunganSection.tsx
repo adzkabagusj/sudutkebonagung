@@ -32,7 +32,7 @@ export default async function PlumbunganSection() {
         <div className="mt-8">
           <Link
             href="/profil/plumbungan"
-            className="border border-secondary text-secondary font-bold py-3 px-8 rounded-full hover:bg-secondary hover:text-white transition-colors duration-300">
+            className="border text-sm md:text-xl border-secondary text-secondary font-bold py-3 px-8 rounded-full hover:bg-secondary hover:text-white transition-colors duration-300">
             Profil Desa Selengkapnya
           </Link>
         </div>
